@@ -3,15 +3,18 @@
     package="com.example.yang.testbyyang">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="21" />
+
+
 
     <application
+        android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_rongcloud"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.LoginActivity">
             <intent-filter>
@@ -20,10 +23,79 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity">
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="com.example.yang.testbyyang"
+                    android:pathPrefix="/push_message"
+                    android:scheme="rong" />
+            </intent-filter>
 
         </activity>
+        <!--群组详情-->
+        <activity
+            android:name=".ui.activity.GroupDetailActivity"
+            android:screenOrientation="portrait"></activity>
 
+        <!--新的朋友列表-->
+        <activity
+            android:name=".ui.activity.NewFriendListActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
+    <!--会话页面-->
+    <activity
+        android:name=".ui.activity.ConversationActivity"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="stateHidden|adjustResize">
 
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+
+            <data
+                android:host="com.example.yang.testbyyang"
+                android:pathPrefix="/conversation/"
+                android:scheme="rong" />
+        </intent-filter>
+
+    </activity>
+    <!--会话列表-->
+    <activity
+        android:name=".ui.activity.ConversationListActivity"
+        android:launchMode="singleTask"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="stateHidden|adjustResize">
+
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data
+                android:host="com.example.yang.testbyyang"
+                android:path="/conversationlist"
+                android:scheme="rong" />
+        </intent-filter>
+    </activity>
+    <!--聚合会话列表-->
+    <activity
+        android:name=".ui.activity.SubConversationListActivity"
+        android:launchMode="singleTask"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="stateHidden|adjustResize">
+
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data
+                android:host="com.example.yang.testbyyang"
+                android:path="/subconversationlist"
+                android:scheme="rong" />
+        </intent-filter>
+    </activity>
+    <activity android:name=".ui.activity.NewTextMessageActivity"></activity>
 </manifest>
